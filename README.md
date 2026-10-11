@@ -29,6 +29,15 @@ fundamentals to Object-Oriented Programming (OOP).
 - Financial status checking
 - Dashboard values updated using JavaScript
 
+### Day 03 — Conditions & Loops
+- Monthly budget limit checking
+- Budget status: Within, Fully Used, Over
+- Expense category summary
+- Highest expense category detection
+- Loop-based expense calculation
+- Invalid/negative expense skipping
+- Budget progress visualization
+
 ## Learning Roadmap
 
 - Day 01: JavaScript Introduction & Setup
@@ -49,4 +58,4 @@ fundamentals to Object-Oriented Programming (OOP).
 
 ## Current Status
 
-Day 01 — Initial Setup
+Day 03 Complete

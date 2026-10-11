@@ -41,4 +41,21 @@
 - Displayed financial data on dashboard
 - Tested positive and negative balances
 
+## Day 03 — Level 03
 
+### Topics Practiced
+- if, else if, else
+- switch and ternary
+- for and for...of loops
+- break and continue
+- Nested conditional logic
+
+### Project Features
+- Added monthly budget checking
+- Added category analysis
+- Calculated expense using loops
+- Highlighted highest expense category
+- Added budget progress bar
+
+### Next Level
+Functions & Scope
