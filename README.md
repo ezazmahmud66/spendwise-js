@@ -21,6 +21,14 @@ fundamentals to Object-Oriented Programming (OOP).
 - JavaScript file integration
 - Basic console output
 
+### Day 02 — JavaScript Fundamentals
+- Income calculation
+- Expense calculation
+- Balance calculation
+- Explicit string-to-number conversion
+- Financial status checking
+- Dashboard values updated using JavaScript
+
 ## Learning Roadmap
 
 - Day 01: JavaScript Introduction & Setup

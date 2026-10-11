@@ -24,5 +24,21 @@
 - How to inspect console output
 - How to organize a basic web project
 
-### Next Day
-JavaScript variables, data types, and operators.
+## Day 02 — Level 02
+
+### Topics Practiced
+- Variables: let and const
+- Data Types
+- Arithmetic, Comparison and Logical Operators
+- Type Conversion
+- Truthy / Falsy
+- Template Literals
+
+### Project Implementation
+- Calculated total income
+- Calculated total expenses
+- Calculated remaining balance
+- Displayed financial data on dashboard
+- Tested positive and negative balances
+
+
