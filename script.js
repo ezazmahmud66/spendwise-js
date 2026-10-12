@@ -1,295 +1,390 @@
 
 /*
-  SpendWise — Day 04
-  Level 4: Functions & Scope
-  Vanilla JavaScript
+  SpendWise — Day 05
+  Level 5: Arrays & Strings
+  Features: Add, Delete, Search, Filter,
+            Balance, Budget, Category Analysis
 */
 
 // ========================================
-// STEP 1: SAMPLE DATA
+// STEP 1: INITIAL TRANSACTION DATA
 // ========================================
 
-const incomeSources = [15000, 5000];
-
-const categories = [
-  "Rent",
-  "Food",
-  "Transport",
-  "Shopping"
-];
-
-const expenses = [
-  5000,
-  3000,
-  1200,
-  1600
+let transactions = [
+  {
+    id: 1,
+    title: "Monthly Salary",
+    amount: 15000,
+    type: "income",
+    category: "Salary"
+  },
+  {
+    id: 2,
+    title: "Freelance Work",
+    amount: 5000,
+    type: "income",
+    category: "Freelance"
+  },
+  {
+    id: 3,
+    title: "House Rent",
+    amount: 5000,
+    type: "expense",
+    category: "Housing"
+  },
+  {
+    id: 4,
+    title: "Groceries",
+    amount: 3000,
+    type: "expense",
+    category: "Food"
+  },
+  {
+    id: 5,
+    title: "Bus Transport",
+    amount: 1200,
+    type: "expense",
+    category: "Transport"
+  },
+  {
+    id: 6,
+    title: "Shopping",
+    amount: 1600,
+    type: "expense",
+    category: "Shopping"
+  }
 ];
 
 const monthlyBudget = 12000;
+let nextId = 7;
 
+const allowedCategories = [
+  "Food", "Housing", "Transport", "Shopping",
+  "Health", "Salary", "Freelance", "Other"
+];
 
 // ========================================
 // STEP 2: HELPER FUNCTIONS
 // ========================================
 
-// Arrow Function: Currency Formatting
-const formatMoney = (amount) => {
-  return `৳ ${amount.toLocaleString("en-BD", {
+const formatMoney = amount =>
+  `৳ ${amount.toLocaleString("en-BD", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   })}`;
-};
 
-// Reusable Sum Function
-function calculateTotal(amounts) {
-  let total = 0;
-
-  for (const amount of amounts) {
-    if (!Number.isFinite(amount) || amount < 0) {
-      continue;
-    }
-
-    total += amount;
-  }
-
-  return total;
-}
-
+// Convert text to lowercase for searching
+const normalizeText = text =>
+  text.trim().toLowerCase();
 
 // ========================================
 // STEP 3: FINANCIAL CALCULATIONS
 // ========================================
 
-function calculateIncome(incomes) {
-  return calculateTotal(incomes);
+// reduce(): Calculate total by type
+function calculateTotal(type) {
+  return transactions
+    .filter(transaction => transaction.type === type)
+    .reduce((total, transaction) => {
+      return total + transaction.amount;
+    }, 0);
 }
 
-function calculateExpense(expenseList) {
-  return calculateTotal(expenseList);
+function calculateIncome() {
+  return calculateTotal("income");
 }
 
-function calculateBalance(income, expense) {
-  return income - expense;
+function calculateExpense() {
+  return calculateTotal("expense");
 }
 
+function calculateBalance() {
+  return calculateIncome() - calculateExpense();
+}
 
 // ========================================
-// STEP 4: BUDGET CHECKING
+// STEP 4: BUDGET ANALYSIS
 // ========================================
 
-function checkBudget(expense, budget) {
-  let status = "";
-  let statusClass = "";
+function checkBudget() {
+  const expense = calculateExpense();
+  const remaining = monthlyBudget - expense;
+  const percentage = (expense / monthlyBudget) * 100;
 
-  if (expense > budget) {
+  let status = "Within Budget";
+  let statusClass = "status-good";
+
+  if (expense > monthlyBudget) {
     status = "Over Budget";
     statusClass = "status-danger";
-
-  } else if (expense === budget) {
+  } else if (expense === monthlyBudget) {
     status = "Budget Fully Used";
     statusClass = "status-warning";
-
-  } else {
-    status = "Within Budget";
-    statusClass = "status-good";
-  }
-
-  const remaining = budget - expense;
-
-  const percentage = budget > 0
-    ? (expense / budget) * 100
-    : 0;
-
-  return {
-    status: status,
-    statusClass: statusClass,
-    remaining: remaining,
-    percentage: percentage
-  };
-}
-
-
-// ========================================
-// STEP 5: EXPENSE CATEGORY ANALYSIS
-// ========================================
-
-function getCategoryLabel(category) {
-  switch (category) {
-    case "Rent":
-      return "Housing";
-
-    case "Food":
-      return "Food & Dining";
-
-    case "Transport":
-      return "Transportation";
-
-    case "Shopping":
-      return "Shopping";
-
-    default:
-      return "Others";
-  }
-}
-
-function analyzeCategories(names, amounts) {
-  const result = [];
-
-  let highestAmount = 0;
-  let highestCategory = "None";
-
-  for (let i = 0; i < amounts.length; i++) {
-    const amount = amounts[i];
-
-    if (!Number.isFinite(amount) || amount < 0) {
-      continue;
-    }
-
-    const label = getCategoryLabel(names[i]);
-
-    result.push({
-      name: label,
-      amount: amount
-    });
-
-    if (amount > highestAmount) {
-      highestAmount = amount;
-      highestCategory = label;
-    }
   }
 
   return {
-    items: result,
-    highestAmount: highestAmount,
-    highestCategory: highestCategory
+    status,
+    statusClass,
+    remaining,
+    percentage
   };
 }
 
-
 // ========================================
-// STEP 6: CLOSURE EXAMPLE
-// ========================================
-
-// Private Savings State
-function createSavingsTracker(initialSavings = 0) {
-  let savings = initialSavings;
-
-  return function(amount = 0) {
-    if (!Number.isFinite(amount) || amount < 0) {
-      return savings;
-    }
-
-    savings += amount;
-    return savings;
-  };
-}
-
-const trackSavings = createSavingsTracker();
-
-
-// ========================================
-// STEP 7: CALLBACK FUNCTION
+// STEP 5: CATEGORY ANALYSIS
 // ========================================
 
-function processFinancialData(callback) {
-  const income = calculateIncome(incomeSources);
-  const expense = calculateExpense(expenses);
-  const balance = calculateBalance(income, expense);
-
-  const budget = checkBudget(expense, monthlyBudget);
-
-  const categoryAnalysis = analyzeCategories(
-    categories,
-    expenses
+function analyzeCategories() {
+  const expenseTransactions = transactions.filter(
+    transaction => transaction.type === "expense"
   );
 
-  const data = {
-    income: income,
-    expense: expense,
-    balance: balance,
-    budget: budget,
-    categoryAnalysis: categoryAnalysis
-  };
+  // Extract unique category names
+  const categoryNames = [
+    ...new Set(
+      expenseTransactions.map(
+        transaction => transaction.category
+      )
+    )
+  ];
 
-  callback(data);
+  // Calculate total for each category
+  const categoryTotals = categoryNames.map(category => {
+    const total = expenseTransactions
+      .filter(transaction => {
+        return transaction.category === category;
+      })
+      .reduce((sum, transaction) => {
+        return sum + transaction.amount;
+      }, 0);
+
+    return {
+      name: category,
+      amount: total
+    };
+  });
+
+  // Sort highest first
+  categoryTotals.sort((a, b) => b.amount - a.amount);
+
+  // find(): Get first positive expense category
+  const highest = categoryTotals.find(
+    category => category.amount > 0
+  );
+
+  return {
+    items: categoryTotals,
+    highest: highest || null
+  };
 }
 
+// ========================================
+// STEP 6: TRANSACTION VALIDATION
+// ========================================
+
+function validateTransaction(title, amount, type, category) {
+  if (!title || !title.trim()) {
+    return "Please enter a transaction title.";
+  }
+
+  if (title.trim().length > 80) {
+    return "Title must be 80 characters or fewer.";
+  }
+
+  if (!Number.isFinite(amount) ||
+      amount <= 0 ||
+      amount > 1000000000) {
+    return "Enter a valid amount between 0.01 and 1,000,000,000.";
+  }
+
+  if (!Number.isInteger(Math.round(amount * 100))) {
+    return "Invalid amount.";
+  }
+
+  if (Math.round(amount * 100) / 100 !== amount) {
+    return "Only 2 decimal places are allowed.";
+  }
+
+  if (type !== "income" && type !== "expense") {
+    return "Invalid transaction type.";
+  }
+
+  if (!allowedCategories.includes(category)) {
+    return "Invalid category.";
+  }
+
+  return "";
+}
 
 // ========================================
-// STEP 8: UI RENDERING
+// STEP 7: ADD TRANSACTION — push()
 // ========================================
 
-function renderDashboard(data) {
-  // Node.js has no document object
-  if (typeof document === "undefined") {
+function addTransaction(title, amount, type, category) {
+  const error = validateTransaction(
+    title, amount, type, category
+  );
+
+  if (error) {
+    return error;
+  }
+
+  const newTransaction = {
+    id: nextId,
+    title: title.trim(),
+    amount: amount,
+    type: type,
+    category: category
+  };
+
+  transactions.push(newTransaction);
+  nextId++;
+
+  renderDashboard();
+
+  return "";
+}
+
+// ========================================
+// STEP 8: DELETE TRANSACTION — filter()
+// ========================================
+
+function deleteTransaction(id) {
+  const exists = transactions.some(
+    transaction => transaction.id === id
+  );
+
+  if (!exists) {
     return;
   }
 
-  const incomeElement = document.getElementById("income");
-  const expenseElement = document.getElementById("expense");
-  const balanceElement = document.getElementById("balance");
-
-  incomeElement.textContent = formatMoney(data.income);
-  expenseElement.textContent = formatMoney(data.expense);
-  balanceElement.textContent = formatMoney(data.balance);
-
-  const balanceStatus = document.getElementById(
-    "balance-status"
+  transactions = transactions.filter(
+    transaction => transaction.id !== id
   );
 
-  balanceStatus.textContent = data.balance >= 0
-    ? "Your balance is healthy"
-    : "Warning: You are overspending";
+  renderDashboard();
+}
 
-  // Budget Information
+// ========================================
+// STEP 9: SEARCH & FILTER
+// ========================================
+
+function getFilteredTransactions() {
+  const searchText = normalizeText(
+    document.getElementById("search-input").value
+  );
+
+  const selectedType =
+    document.getElementById("filter-type").value;
+
+  const selectedCategory =
+    document.getElementById("filter-category").value;
+
+  return transactions.filter(transaction => {
+    // Search by title or category
+    const matchesSearch =
+      normalizeText(transaction.title).includes(searchText) ||
+      normalizeText(transaction.category).includes(searchText);
+
+    // Filter by income / expense
+    const matchesType =
+      selectedType === "all" ||
+      transaction.type === selectedType;
+
+    // Filter by category
+    const matchesCategory =
+      selectedCategory === "all" ||
+      transaction.category === selectedCategory;
+
+    return matchesSearch &&
+           matchesType &&
+           matchesCategory;
+  });
+}
+
+// ========================================
+// STEP 10: RENDER FINANCIAL SUMMARY
+// ========================================
+
+function renderSummary() {
+  const income = calculateIncome();
+  const expense = calculateExpense();
+  const balance = calculateBalance();
+
+  document.getElementById("income").textContent =
+    formatMoney(income);
+
+  document.getElementById("expense").textContent =
+    formatMoney(expense);
+
+  document.getElementById("balance").textContent =
+    formatMoney(balance);
+
+  document.getElementById("balance-status").textContent =
+    balance >= 0
+      ? "Your balance is healthy"
+      : "Warning: You are overspending";
+}
+
+// ========================================
+// STEP 11: RENDER BUDGET
+// ========================================
+
+function renderBudget() {
+  const budget = checkBudget();
+  const expense = calculateExpense();
+
   document.getElementById("budget-limit").textContent =
     formatMoney(monthlyBudget);
 
   document.getElementById("budget-spent").textContent =
-    formatMoney(data.expense);
+    formatMoney(expense);
 
-  const budgetStatus = document.getElementById(
-    "budget-status"
-  );
+  const statusElement =
+    document.getElementById("budget-status");
 
-  budgetStatus.textContent = data.budget.status;
-  budgetStatus.className = data.budget.statusClass;
+  statusElement.textContent = budget.status;
+  statusElement.className = budget.statusClass;
 
-  const remainingElement = document.getElementById(
-    "budget-remaining"
-  );
+  document.getElementById("budget-remaining").textContent =
+    budget.remaining >= 0
+      ? `Remaining: ${formatMoney(budget.remaining)}`
+      : `Exceeded by: ${formatMoney(Math.abs(budget.remaining))}`;
 
-  remainingElement.textContent = data.budget.remaining >= 0
-    ? `Remaining: ${formatMoney(data.budget.remaining)}`
-    : `Exceeded by: ${formatMoney(Math.abs(data.budget.remaining))}`;
+  const progress =
+    document.getElementById("budget-progress");
 
-  // Budget Progress Bar
-  const progress = document.getElementById(
-    "budget-progress"
-  );
-
-  const progressWidth = Math.min(
-    Math.max(data.budget.percentage, 0),
-    100
-  );
-
-  progress.style.width = `${progressWidth}%`;
+  progress.style.width =
+    `${Math.min(Math.max(budget.percentage, 0), 100)}%`;
 
   progress.style.backgroundColor =
-    data.budget.status === "Over Budget"
+    budget.status === "Over Budget"
       ? "#dc2626"
-      : data.budget.status === "Budget Fully Used"
+      : budget.status === "Budget Fully Used"
         ? "#d97706"
         : "#168765";
+}
 
-  // Category Analysis
-  const categoryList = document.getElementById(
-    "category-list"
-  );
+// ========================================
+// STEP 12: RENDER CATEGORY ANALYSIS
+// ========================================
 
-  categoryList.replaceChildren();
+function renderCategories() {
+  const analysis = analyzeCategories();
+  const expenseTotal = calculateExpense();
 
-  for (const category of data.categoryAnalysis.items) {
+  const container =
+    document.getElementById("category-list");
+
+  container.replaceChildren();
+
+  if (analysis.items.length === 0) {
+    const message = document.createElement("p");
+    message.textContent = "No expense data available.";
+    container.appendChild(message);
+  }
+
+  analysis.items.forEach(category => {
     const item = document.createElement("div");
     item.className = "category-item";
 
@@ -311,8 +406,8 @@ function renderDashboard(data) {
     const fill = document.createElement("div");
     fill.className = "category-fill";
 
-    const percentage = data.expense > 0
-      ? (category.amount / data.expense) * 100
+    const percentage = expenseTotal > 0
+      ? (category.amount / expenseTotal) * 100
       : 0;
 
     fill.style.width = `${percentage}%`;
@@ -320,57 +415,176 @@ function renderDashboard(data) {
     bar.appendChild(fill);
     item.appendChild(info);
     item.appendChild(bar);
+    container.appendChild(item);
+  });
 
-    categoryList.appendChild(item);
+  const topCategory =
+    document.getElementById("top-category");
+
+  if (analysis.highest) {
+    topCategory.textContent =
+      `Highest Expense: ${analysis.highest.name} — ` +
+      formatMoney(analysis.highest.amount);
+  } else {
+    topCategory.textContent = "Highest Expense: None";
   }
-
-  if (data.categoryAnalysis.items.length === 0) {
-    const emptyMessage = document.createElement("p");
-    emptyMessage.textContent = "No valid expenses available.";
-    categoryList.appendChild(emptyMessage);
-  }
-
-  // Highest Expense
-  document.getElementById("top-category").textContent =
-    `Highest Expense: ${data.categoryAnalysis.highestCategory} — ${formatMoney(data.categoryAnalysis.highestAmount)}`;
 }
 
-
 // ========================================
-// STEP 9: CONSOLE REPORT
+// STEP 13: RENDER TRANSACTION LIST
 // ========================================
 
-function printFinancialReport(data) {
-  console.log("===== SPENDWISE DAY 04 =====");
+function renderTransactions() {
+  const filtered = getFilteredTransactions();
 
-  console.log(`Income: ${formatMoney(data.income)}`);
-  console.log(`Expense: ${formatMoney(data.expense)}`);
-  console.log(`Balance: ${formatMoney(data.balance)}`);
+  const container =
+    document.getElementById("transaction-list");
 
-  console.log(`Budget Status: ${data.budget.status}`);
+  container.replaceChildren();
 
-  console.log(
-    `Budget Used: ${data.budget.percentage.toFixed(2)}%`
-  );
+  document.getElementById("transaction-count").textContent =
+    `${filtered.length} of ${transactions.length} Transactions`;
 
-  console.log(
-    `Highest Category: ${data.categoryAnalysis.highestCategory}`
-  );
+  if (filtered.length === 0) {
+    const message = document.createElement("p");
+    message.className = "empty-state";
+    message.textContent = "No matching transactions found.";
+    container.appendChild(message);
+    return;
+  }
+
+  filtered.forEach(transaction => {
+    const item = document.createElement("div");
+    item.className = "transaction-item";
+
+    // Left: title and category
+    const details = document.createElement("div");
+    details.className = "transaction-details";
+
+    const title = document.createElement("h4");
+    title.textContent = transaction.title;
+
+    const subtitle = document.createElement("p");
+    subtitle.textContent =
+      `${transaction.category} • ${transaction.type}`;
+
+    details.appendChild(title);
+    details.appendChild(subtitle);
+
+    // Right: amount and delete button
+    const right = document.createElement("div");
+    right.className = "transaction-right";
+
+    const amount = document.createElement("span");
+    amount.className =
+      "transaction-amount " +
+      (transaction.type === "income"
+        ? "amount-income"
+        : "amount-expense");
+
+    const prefix = transaction.type === "income" ? "+" : "−";
+
+    amount.textContent =
+      `${prefix} ${formatMoney(transaction.amount)}`;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "delete-btn";
+    deleteButton.textContent = "Delete";
+
+    deleteButton.setAttribute(
+      "aria-label",
+      `Delete transaction: ${transaction.title}`
+    );
+
+    deleteButton.addEventListener("click", () => {
+      deleteTransaction(transaction.id);
+    });
+
+    right.appendChild(amount);
+    right.appendChild(deleteButton);
+
+    item.appendChild(details);
+    item.appendChild(right);
+
+    container.appendChild(item);
+  });
 }
 
+// ========================================
+// STEP 14: UPDATE COMPLETE DASHBOARD
+// ========================================
+
+function renderDashboard() {
+  renderSummary();
+  renderBudget();
+  renderCategories();
+  renderTransactions();
+}
 
 // ========================================
-// STEP 10: RUN THE APPLICATION
+// STEP 15: FORM SUBMIT EVENT
 // ========================================
 
-// Callback 1: Render Dashboard
-processFinancialData(renderDashboard);
+const transactionForm =
+  document.getElementById("transaction-form");
 
-// Callback 2: Print Console Report
-processFinancialData(printFinancialReport);
+transactionForm.addEventListener("submit", event => {
+  event.preventDefault();
 
-// Closure Demonstration
-console.log("===== SAVINGS TRACKER =====");
-console.log(formatMoney(trackSavings(500)));
-console.log(formatMoney(trackSavings(1000)));
-console.log(formatMoney(trackSavings(1500)));
+  const title =
+    document.getElementById("title").value;
+
+  const amount =
+    Number(document.getElementById("amount").value);
+
+  const type =
+    document.getElementById("type").value;
+
+  const category =
+    document.getElementById("category").value;
+
+  const error = addTransaction(
+    title, amount, type, category
+  );
+
+  const message =
+    document.getElementById("form-message");
+
+  if (error) {
+    message.textContent = error;
+    message.className = "status-danger";
+    return;
+  }
+
+  message.textContent = "Transaction added successfully!";
+  message.className = "status-good";
+
+  transactionForm.reset();
+});
+
+// ========================================
+// STEP 16: SEARCH & FILTER EVENTS
+// ========================================
+
+document.getElementById("search-input")
+  .addEventListener("input", renderTransactions);
+
+document.getElementById("filter-type")
+  .addEventListener("change", renderTransactions);
+
+document.getElementById("filter-category")
+  .addEventListener("change", renderTransactions);
+
+// ========================================
+// STEP 17: INITIALIZE APPLICATION
+// ========================================
+
+renderDashboard();
+
+console.log("===== SPENDWISE DAY 05 =====");
+console.log("Initial Transactions:", transactions.length);
+console.log("Income:", calculateIncome());
+console.log("Expense:", calculateExpense());
+console.log("Balance:", calculateBalance());
+console.log("SpendWise is ready!");

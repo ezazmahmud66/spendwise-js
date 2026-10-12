@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SpendWise personal expense tracker">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+        content="SpendWise personal expense tracker">
   <title>SpendWise | Expense Tracker</title>
 
   <link rel="stylesheet" href="style.css">
@@ -23,21 +25,19 @@
           <p>Personal Expense Tracker</p>
         </div>
       </div>
-
-      <span class="day-label">Day 04</span>
+      <span class="day-label">Day 05</span>
     </header>
 
     <main>
 
-      <!-- Dashboard Introduction -->
+      <!-- Welcome -->
       <section class="welcome">
         <h2>My Dashboard</h2>
-        <p>Track your income, expenses and budget.</p>
+        <p>Manage your money with confidence.</p>
       </section>
 
       <!-- Financial Summary -->
       <section class="summary">
-
         <div class="card balance-card">
           <p>Total Balance</p>
           <h2 id="balance">৳ 0.00</h2>
@@ -55,18 +55,16 @@
           <h2 id="expense">৳ 0.00</h2>
           <span class="expense-text">Money spent</span>
         </div>
-
       </section>
 
       <!-- Monthly Budget -->
-      <section class="budget-section">
+      <section class="panel">
         <h3>Monthly Budget</h3>
 
         <div class="budget-info">
-          <p>Budget Limit:
+          <p>Budget:
             <strong id="budget-limit">৳ 0</strong>
           </p>
-
           <p>Spent:
             <strong id="budget-spent">৳ 0</strong>
           </p>
@@ -76,40 +74,130 @@
           <div id="budget-progress" class="progress-fill"></div>
         </div>
 
-        <p id="budget-status" aria-live="polite">Checking budget...</p>
+        <p id="budget-status" aria-live="polite">
+          Checking budget...
+        </p>
         <p id="budget-remaining"></p>
       </section>
 
       <!-- Category Analysis -->
-      <section class="category-section">
+      <section class="panel">
         <h3>Expense Category Analysis</h3>
-
-        <div id="category-list">
-          <p>No category data available.</p>
-        </div>
-
+        <div id="category-list"></div>
         <p id="top-category"></p>
       </section>
 
-      <!-- Recent Transactions -->
-      <section class="transactions">
-        <h3>Recent Transactions</h3>
+      <!-- Add Transaction -->
+      <section class="panel">
+        <h3>Add New Transaction</h3>
 
-        <div class="empty-state">
-          <p>No transactions yet.</p>
-          <small>
-            Transaction history will be added in Day 05.
-          </small>
+        <form id="transaction-form">
+          <div class="form-grid">
+
+            <div class="form-group full-width">
+              <label for="title">Transaction Title</label>
+              <input
+                type="text"
+                id="title"
+                placeholder="e.g. Grocery Shopping"
+                maxlength="80"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="amount">Amount (BDT)</label>
+              <input
+                type="number"
+                id="amount"
+                placeholder="e.g. 500"
+                min="0.01"
+                max="1000000000"
+                step="0.01"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="type">Transaction Type</label>
+              <select id="type" required>
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="category">Category</label>
+              <select id="category" required>
+                <option value="Food">Food</option>
+                <option value="Housing">Housing</option>
+                <option value="Transport">Transport</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Health">Health</option>
+                <option value="Salary">Salary</option>
+                <option value="Freelance">Freelance</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+          </div>
+
+          <button type="submit" class="primary-btn">
+            + Add Transaction
+          </button>
+
+          <p id="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <!-- Transaction List -->
+      <section class="panel">
+        <div class="section-heading">
+          <h3>Recent Transactions</h3>
+          <span id="transaction-count" class="count-badge">
+            0 Transactions
+          </span>
+        </div>
+
+        <div class="filters">
+
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Search transactions..."
+            aria-label="Search transactions"
+          >
+
+          <select id="filter-type" aria-label="Filter transaction type">
+            <option value="all">All Types</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+
+          <select id="filter-category"
+                  aria-label="Filter transaction category">
+            <option value="all">All Categories</option>
+            <option value="Food">Food</option>
+            <option value="Housing">Housing</option>
+            <option value="Transport">Transport</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Health">Health</option>
+            <option value="Salary">Salary</option>
+            <option value="Freelance">Freelance</option>
+            <option value="Other">Other</option>
+          </select>
+
+        </div>
+
+        <div id="transaction-list" class="transaction-list">
         </div>
       </section>
 
     </main>
 
-    <!-- Footer -->
     <footer>
-      <p>SpendWise — JavaScript Learning Project | Day 04</p>
+      <p>SpendWise — JavaScript Learning Project | Day 05</p>
     </footer>
-
   </div>
 </body>
 </html>

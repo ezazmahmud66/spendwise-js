@@ -3,63 +3,96 @@
 
 ## Day 01 — Level 01
 
-Topics:
-- Introduction to JavaScript
+### Topics
+- JavaScript introduction
 - Environment setup
 - console.log()
-- HTML/CSS/JS connection
+- HTML, CSS and JavaScript integration
 
-Project:
-- Created responsive dashboard
+### Project
+- Created initial SpendWise dashboard
 - Initialized Git repository
 
 ## Day 02 — Level 02
 
-Topics:
+### Topics
 - Variables and data types
 - Operators
 - Type conversion
 - Template literals
 
-Project:
-- Income calculation
-- Expense calculation
-- Balance calculation
+### Project
+- Added income calculation
+- Added expense calculation
+- Added balance calculation
 
 ## Day 03 — Level 03
 
-Topics:
-- Conditions
+### Topics
+- Conditional statements
 - switch and ternary
 - Loops
 - break and continue
 
-Project:
-- Budget checking
-- Expense category analysis
-- Progress visualization
+### Project
+- Added budget checking
+- Added expense category analysis
+- Added budget progress bar
 
 ## Day 04 — Level 04
 
-Topics:
+### Topics
 - Function declarations
-- Parameters and return values
 - Arrow functions
-- Callback functions
-- Scope
-- Closures
+- Callbacks
+- Scope and closures
 
-Project:
-- Created reusable calculation functions
-- Refactored budget checking
-- Refactored category analysis
-- Separated financial logic from UI rendering
-- Added savings tracker closure example
+### Project
+- Refactored financial calculations
+- Added reusable functions
+- Improved dashboard rendering
 
-## Next: Day 05
+## Day 05 — Level 05
 
-Arrays & Strings:
-- Transaction lists
-- Search
-- Filtering
-- Array methods
+### Topics
+- Array fundamentals
+- push(), filter(), map()
+- reduce(), find(), some()
+- sort() and forEach()
+- String methods
+- Search and filtering
+
+### Project
+- Created transaction data array
+- Implemented Add Transaction
+- Implemented Delete Transaction
+- Added case-insensitive search
+- Added type and category filters
+- Connected transactions to balance calculations
+- Updated category analysis dynamically
+- Preserved budget monitoring
+
+### Testing
+- Tested initial balance
+- Tested adding income
+- Tested adding expense
+- Tested deleting transactions
+- Tested search and category filters
+- Tested empty search results
+- Tested invalid transaction amount
+
+### Current Limitations
+- Data is not persistent after refresh
+- Transactions use in-memory storage
+- No backend or database yet
+
+## Next: Day 06
+
+Objects & Modern JavaScript
+
+- Transaction object structure
+- Object methods
+- Destructuring
+- Spread and rest
+- JSON processing
+- Object-based state management
