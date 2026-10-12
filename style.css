@@ -1,4 +1,6 @@
 
+/* SpendWise — Day 04 */
+
 * {
   margin: 0;
   padding: 0;
@@ -7,8 +9,9 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f7f8;
+  background: #f4f7f8;
   color: #1e293b;
+  line-height: 1.5;
 }
 
 .container {
@@ -17,11 +20,14 @@ body {
   padding: 30px 20px;
 }
 
+/* Header */
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
+  gap: 15px;
+  margin-bottom: 45px;
 }
 
 .brand {
@@ -33,12 +39,12 @@ body {
 .logo {
   width: 45px;
   height: 45px;
+  border-radius: 12px;
   background: #123c43;
   color: white;
-  border-radius: 12px;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   font-size: 24px;
   font-weight: bold;
 }
@@ -50,7 +56,6 @@ body {
 .brand p {
   font-size: 12px;
   color: #64748b;
-  margin-top: 5px;
 }
 
 .day-label {
@@ -60,7 +65,10 @@ body {
   border-radius: 20px;
   font-size: 12px;
   font-weight: bold;
+  white-space: nowrap;
 }
+
+/* Welcome */
 
 .welcome {
   margin-bottom: 25px;
@@ -68,25 +76,27 @@ body {
 
 .welcome h2 {
   font-size: 28px;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 .welcome p {
   color: #64748b;
 }
 
+/* Financial Cards */
+
 .summary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .card {
   background: white;
+  border: 1px solid #e2e8f0;
   border-radius: 15px;
   padding: 25px;
-  border: 1px solid #e2e8f0;
 }
 
 .card p {
@@ -95,8 +105,9 @@ body {
 }
 
 .card h2 {
-  font-size: 28px;
   margin: 15px 0;
+  font-size: 28px;
+  overflow-wrap: anywhere;
 }
 
 .card span {
@@ -123,71 +134,21 @@ body {
   color: #dc2626 !important;
 }
 
+/* Budget and Category */
+
+.budget-section,
+.category-section,
 .transactions {
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 15px;
   padding: 25px;
-}
-
-.transactions h3 {
   margin-bottom: 25px;
 }
 
-.empty-state {
-  text-align: center;
-  padding: 45px 10px;
-  color: #64748b;
-}
-
-.empty-state small {
-  display: block;
-  margin-top: 10px;
-}
-
-footer {
-  text-align: center;
-  padding-top: 50px;
-  font-size: 12px;
-  color: #94a3b8;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 20px 15px;
-  }
-
-  .header {
-    margin-bottom: 35px;
-  }
-
-  .summary {
-    grid-template-columns: 1fr;
-  }
-
-  .welcome h2 {
-    font-size: 24px;
-  }
-
-  .card h2 {
-    font-size: 25px;
-  }
-}
-
-
-/* Day 03 — Budget & Category Analysis */
-
-.budget-section,
-.category-section {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 15px;
-  padding: 25px;
-  margin-top: 25px;
-}
-
 .budget-section h3,
-.category-section h3 {
+.category-section h3,
+.transactions h3 {
   margin-bottom: 20px;
 }
 
@@ -211,10 +172,17 @@ footer {
 .progress-track,
 .category-bar {
   width: 100%;
-  height: 10px;
   background: #e2e8f0;
   border-radius: 20px;
   overflow: hidden;
+}
+
+.progress-track {
+  height: 10px;
+}
+
+.category-bar {
+  height: 8px;
 }
 
 .progress-fill,
@@ -226,7 +194,7 @@ footer {
 }
 
 .progress-fill {
-  width: 0%;
+  width: 0;
 }
 
 #budget-status {
@@ -236,8 +204,8 @@ footer {
 
 #budget-remaining {
   margin-top: 8px;
-  color: #64748b;
   font-size: 13px;
+  color: #64748b;
 }
 
 .category-item {
@@ -247,6 +215,7 @@ footer {
 .category-info {
   display: flex;
   justify-content: space-between;
+  gap: 15px;
   margin-bottom: 8px;
   font-size: 14px;
 }
@@ -256,6 +225,8 @@ footer {
   font-weight: bold;
   color: #123c43;
 }
+
+/* Status Colors */
 
 .status-good {
   color: #168765;
@@ -269,9 +240,57 @@ footer {
   color: #dc2626;
 }
 
+/* Transaction */
+
+.empty-state {
+  text-align: center;
+  padding: 40px 10px;
+  color: #64748b;
+}
+
+.empty-state small {
+  display: block;
+  margin-top: 10px;
+}
+
+/* Footer */
+
+footer {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome h2 {
+    font-size: 24px;
+  }
+}
+
 @media (max-width: 480px) {
+  .container {
+    padding: 20px 15px;
+  }
+
+  .header {
+    margin-bottom: 30px;
+  }
+
+  .brand h1 {
+    font-size: 20px;
+  }
+
+  .card,
   .budget-section,
-  .category-section {
+  .category-section,
+  .transactions {
     padding: 18px;
   }
 }

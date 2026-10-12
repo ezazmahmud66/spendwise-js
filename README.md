@@ -1,9 +1,8 @@
 
 # SpendWise — Personal Expense Tracker
 
-A beginner-friendly personal expense tracking web application,
-developed step by step while learning JavaScript from
-fundamentals to Object-Oriented Programming (OOP).
+A personal finance tracking application built step by step
+while learning JavaScript from fundamentals to OOP.
 
 ## Tech Stack
 
@@ -14,48 +13,64 @@ fundamentals to Object-Oriented Programming (OOP).
 
 ## Features
 
-### Day 01 — Level 01
+### Day 01 — Introduction & Setup
 - Project initialization
-- Responsive dashboard layout
-- Income, expense, and balance placeholder cards
-- JavaScript file integration
-- Basic console output
+- Responsive dashboard
+- JavaScript connection
+- Browser Console
 
 ### Day 02 — JavaScript Fundamentals
 - Income calculation
 - Expense calculation
 - Balance calculation
-- Explicit string-to-number conversion
-- Financial status checking
-- Dashboard values updated using JavaScript
+- Type conversion
+- Template literals
 
 ### Day 03 — Conditions & Loops
-- Monthly budget limit checking
-- Budget status: Within, Fully Used, Over
-- Expense category summary
-- Highest expense category detection
-- Loop-based expense calculation
-- Invalid/negative expense skipping
-- Budget progress visualization
+- Monthly budget checking
+- Budget progress bar
+- Expense category analysis
+- Highest expense detection
+- Loop-based calculations
 
-## Learning Roadmap
-
-- Day 01: JavaScript Introduction & Setup
-- Day 02: JavaScript Fundamentals
-- Day 03: Conditions & Loops
-- Day 04: Functions & Scope
-- Day 05: Arrays & Strings
-- Day 06: Objects & Modern JavaScript
-- Day 07: Object-Oriented Programming
-- Day 08: Final Assessment & Refactoring
+### Day 04 — Functions & Scope
+- Reusable financial functions
+- Arrow functions
+- Callback functions
+- Scope and closures
+- Refactored dashboard rendering
+- Savings tracker demonstration
 
 ## Run Locally
 
-1. Download or clone the repository.
-2. Open the project folder.
-3. Open `index.html` in a web browser.
-4. Open Developer Tools to view JavaScript console output.
+1. Clone or download this repository.
+2. Open `index.html` in a web browser.
+3. Press F12 to inspect the JavaScript Console.
 
-## Current Status
+Optional Node.js test:
 
-Day 03 Complete
+```bash
+node script.js
+```
+
+The browser displays the dashboard, while Node.js displays
+the console report.
+
+## Learning Roadmap
+
+- [x] Day 01: JavaScript Introduction
+- [x] Day 02: JavaScript Fundamentals
+- [x] Day 03: Conditions & Loops
+- [x] Day 04: Functions & Scope
+- [ ] Day 05: Arrays & Strings
+- [ ] Day 06: Objects & Modern JavaScript
+- [ ] Day 07: Object-Oriented Programming
+- [ ] Day 08: Final Project & Assessment
+
+## Project Status
+
+Day 04 — Functions & Scope completed.
+
+Financial values currently come from sample data.
+Interactive transactions and persistent storage
+will be implemented in later development stages.

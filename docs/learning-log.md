@@ -3,59 +3,63 @@
 
 ## Day 01 — Level 01
 
-### Topics Covered
+Topics:
 - Introduction to JavaScript
-- HTML, CSS and JavaScript roles
-- VS Code and Node.js setup
-- Browser Console
+- Environment setup
 - console.log()
-- Single-line and multi-line comments
-- Basic debugging
+- HTML/CSS/JS connection
 
-### Project Work
-- Created HTML dashboard structure
-- Added responsive CSS
-- Connected JavaScript
-- Tested console output
-
-### What I Learned
-- How JavaScript connects to HTML
-- How to execute a JavaScript file
-- How to inspect console output
-- How to organize a basic web project
+Project:
+- Created responsive dashboard
+- Initialized Git repository
 
 ## Day 02 — Level 02
 
-### Topics Practiced
-- Variables: let and const
-- Data Types
-- Arithmetic, Comparison and Logical Operators
-- Type Conversion
-- Truthy / Falsy
-- Template Literals
+Topics:
+- Variables and data types
+- Operators
+- Type conversion
+- Template literals
 
-### Project Implementation
-- Calculated total income
-- Calculated total expenses
-- Calculated remaining balance
-- Displayed financial data on dashboard
-- Tested positive and negative balances
+Project:
+- Income calculation
+- Expense calculation
+- Balance calculation
 
 ## Day 03 — Level 03
 
-### Topics Practiced
-- if, else if, else
+Topics:
+- Conditions
 - switch and ternary
-- for and for...of loops
+- Loops
 - break and continue
-- Nested conditional logic
 
-### Project Features
-- Added monthly budget checking
-- Added category analysis
-- Calculated expense using loops
-- Highlighted highest expense category
-- Added budget progress bar
+Project:
+- Budget checking
+- Expense category analysis
+- Progress visualization
 
-### Next Level
-Functions & Scope
+## Day 04 — Level 04
+
+Topics:
+- Function declarations
+- Parameters and return values
+- Arrow functions
+- Callback functions
+- Scope
+- Closures
+
+Project:
+- Created reusable calculation functions
+- Refactored budget checking
+- Refactored category analysis
+- Separated financial logic from UI rendering
+- Added savings tracker closure example
+
+## Next: Day 05
+
+Arrays & Strings:
+- Transaction lists
+- Search
+- Filtering
+- Array methods

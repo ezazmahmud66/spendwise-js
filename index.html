@@ -4,14 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SpendWise personal expense tracker">
   <title>SpendWise | Expense Tracker</title>
+
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
-<body>
 
+<body>
   <div class="container">
 
+    <!-- Header -->
     <header class="header">
       <div class="brand">
         <div class="logo">S</div>
@@ -21,21 +24,24 @@
         </div>
       </div>
 
-     <span class="day-label">Day 03</span>
+      <span class="day-label">Day 04</span>
     </header>
 
     <main>
+
+      <!-- Dashboard Introduction -->
       <section class="welcome">
         <h2>My Dashboard</h2>
-        <p>Welcome to your personal finance dashboard.</p>
+        <p>Track your income, expenses and budget.</p>
       </section>
 
+      <!-- Financial Summary -->
       <section class="summary">
 
         <div class="card balance-card">
           <p>Total Balance</p>
           <h2 id="balance">৳ 0.00</h2>
-         <span id="balance-status">Your current balance</span>
+          <span id="balance-status">Loading...</span>
         </div>
 
         <div class="card">
@@ -52,55 +58,58 @@
 
       </section>
 
+      <!-- Monthly Budget -->
+      <section class="budget-section">
+        <h3>Monthly Budget</h3>
+
+        <div class="budget-info">
+          <p>Budget Limit:
+            <strong id="budget-limit">৳ 0</strong>
+          </p>
+
+          <p>Spent:
+            <strong id="budget-spent">৳ 0</strong>
+          </p>
+        </div>
+
+        <div class="progress-track">
+          <div id="budget-progress" class="progress-fill"></div>
+        </div>
+
+        <p id="budget-status" aria-live="polite">Checking budget...</p>
+        <p id="budget-remaining"></p>
+      </section>
+
+      <!-- Category Analysis -->
+      <section class="category-section">
+        <h3>Expense Category Analysis</h3>
+
+        <div id="category-list">
+          <p>No category data available.</p>
+        </div>
+
+        <p id="top-category"></p>
+      </section>
+
+      <!-- Recent Transactions -->
       <section class="transactions">
         <h3>Recent Transactions</h3>
+
         <div class="empty-state">
           <p>No transactions yet.</p>
-          <small>Your transaction history will appear here.</small>
+          <small>
+            Transaction history will be added in Day 05.
+          </small>
         </div>
       </section>
 
-      
-<!-- Day 03: Budget Analysis -->
-<section class="budget-section">
-  <h3>Monthly Budget</h3>
-
-  <div class="budget-info">
-    <p>Budget Limit:
-      <strong id="budget-limit">৳ 0</strong>
-    </p>
-
-    <p>Spent:
-      <strong id="budget-spent">৳ 0</strong>
-    </p>
-  </div>
-
-  <div class="progress-track">
-    <div id="budget-progress" class="progress-fill"></div>
-  </div>
-
-  <p id="budget-status">Checking budget...</p>
-  <p id="budget-remaining"></p>
-</section>
-
-<!-- Day 03: Category Analysis -->
-<section class="category-section">
-  <h3>Expense Category Analysis</h3>
-
-  <div id="category-list">
-    <p>No category data available.</p>
-  </div>
-
-  <p id="top-category"></p>
-</section>
-
     </main>
 
+    <!-- Footer -->
     <footer>
-      <p>SpendWise — Learning JavaScript Step by Step</p>
+      <p>SpendWise — JavaScript Learning Project | Day 04</p>
     </footer>
 
   </div>
-
 </body>
 </html>
